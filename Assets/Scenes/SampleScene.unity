@@ -1208,7 +1208,7 @@ GameObject:
   - component: {fileID: 1841017436}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1274,7 +1274,7 @@ Transform:
   m_GameObject: {fileID: 1841017432}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.86, y: 0, z: 0}
+  m_LocalPosition: {x: -20, y: 0, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1294,17 +1294,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
   distance: 0
-  acceleration: 10
-  maxAcceleration: 10
-  maxVelocity: 100
   gravity: -400
-  jumpPower: 70
-  isGrounded: 0
-  groundHeight: 0
-  isHoldingJump: 0
-  maxHoldJumpTime: 0.2
-  holdJumpTimer: 0
-  jumpGroundThreshold: 3
+  jumpForce: 70
+  jumpHeightThreshold: 3
 --- !u!114 &1841017436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,7 +1323,19 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1841017435}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 60bc49ec-f8c4-4d5f-8de8-280ec008502e
     m_ActionName: Player/Jump[/Keyboard/space,/Keyboard/w,/Keyboard/upArrow]
   - m_PersistentCalls:
