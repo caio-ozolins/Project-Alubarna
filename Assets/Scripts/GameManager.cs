@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -82,6 +83,11 @@ public class GameManager : MonoBehaviour
         
         UpdateHighScore();
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     
     private void Update()
     {
@@ -100,5 +106,10 @@ public class GameManager : MonoBehaviour
         }
         
         highScoreText.text = Mathf.FloorToInt(highScore).ToString("D6");
+    }
+
+    public void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }
