@@ -6,9 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    // public TextMeshProUGUI gameOverText;
-    // public Button retryButton;
     public GameObject gameOverMenu;
+    public GameObject scoreUI;
+    public TextMeshProUGUI scoreText;
+    
     
     public float initialGameSpeed = 30f;
     public float gameSpeedAcceleration = 2;
@@ -16,7 +17,10 @@ public class GameManager : MonoBehaviour
 
     private Player _player;
     private Spawner _spawner;
-    
+
+    private float _score;
+    private static readonly int IsDead = Animator.StringToHash("isDead");
+
     private void Awake()
     {
         if (Instance == null)
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour
         enabled = true;
         
         _player.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        _player.gameObject.GetComponent<Animator>().SetBool("isDead", false);
+        _player.gameObject.GetComponent<Animator>().SetBool(IsDead, false);
         _spawner.gameObject.SetActive(true);
         gameOverMenu.gameObject.SetActive(false);
     }
@@ -76,5 +80,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         GameSpeed += gameSpeedAcceleration * Time.deltaTime;
+        _score += GameSpeed * Time.deltaTime;
+        scoreText.text = Mathf.FloorToInt(_score).ToString("D5");
     }
 }
