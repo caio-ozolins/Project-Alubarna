@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         
         GameSpeed = initialGameSpeed;
         enabled = true;
+        _score = 0f;
         
         _player.gameObject.GetComponent<BoxCollider2D>().enabled = true;
         _player.gameObject.GetComponent<Animator>().SetBool(IsDead, false);
