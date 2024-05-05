@@ -1,45 +1,20 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Parallax : MonoBehaviour
 {
-    [SerializeField] private float depth = 1;
-
-    private float _initialPositionX;
-    
-    private Player _player;
+    private MeshRenderer _meshRenderer;
+    private float _layer;
 
     private void Awake()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _layer = transform.position.z;
     }
 
-    private void Start()
+    private void Update()
     {
-        _initialPositionX = transform.position.x;
-    }
-
-    private void FixedUpdate()
-    {
-        float realVelocity = _player.velocity.x / depth;
-        Vector2 pos = transform.position;
-
-        pos.x -= realVelocity * Time.fixedDeltaTime;
-
-        
-        if ((_initialPositionX - pos.x) >= 60)
-        {
-            pos.x = _initialPositionX;
-        }
-        
-        // if (pos.x <= -60)
-        // {
-        //     pos.x = 60;
-        // }
-           
-        transform.position = pos;
+        float speed = GameManager.Instance.GameSpeed / transform.localScale.x;
+        _meshRenderer.material.mainTextureOffset += (Vector2.right * (speed * Time.deltaTime)) / (_layer / 2);
     }
 }

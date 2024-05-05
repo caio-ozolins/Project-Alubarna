@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
+    private Animator _animator;
+    
     private const float GroundHeight = 0;
     private const float MaxHoldJumpTime = 0.2f;
 
@@ -21,6 +22,12 @@ public class Player : MonoBehaviour
     private float _holdJumpTimer;
     private bool _isHoldingJump;
     private bool _isGrounded;
+    private static readonly int IsJumping = Animator.StringToHash("isJumping");
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     private void FixedUpdate()
     {
@@ -45,6 +52,7 @@ public class Player : MonoBehaviour
             {
                 _position.y = GroundHeight;
                 _isGrounded = true;
+                _animator.SetBool(IsJumping, false);
             }
         }
 
@@ -56,6 +64,7 @@ public class Player : MonoBehaviour
         if (_isGrounded || _position.y <= jumpHeightThreshold && context.started)
         {
             _isGrounded = false;
+            _animator.SetBool(IsJumping, true);
             _isHoldingJump = true;
             _holdJumpTimer = 0;
             velocity.y = jumpForce;
