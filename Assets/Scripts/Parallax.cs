@@ -15,6 +15,6 @@ public class Parallax : MonoBehaviour
     private void Update()
     {
         float speed = GameManager.Instance.GameSpeed / transform.localScale.x;
-        _meshRenderer.material.mainTextureOffset += (Vector2.right * (speed * Time.deltaTime)) / (_layer / 2);
+        _meshRenderer.material.mainTextureOffset += (Vector2.right * (speed * Time.deltaTime)) / (_layer / 4);
     }
 }
