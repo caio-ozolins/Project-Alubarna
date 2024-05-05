@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverMenu;
     public GameObject scoreUI;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
     
     
     public float initialGameSpeed = 30f;
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour
         _player.gameObject.GetComponent<Animator>().SetBool(IsDead, false);
         _spawner.gameObject.SetActive(true);
         gameOverMenu.gameObject.SetActive(false);
+        
+        UpdateHighScore();
     }
 
     public void GameOver()
@@ -76,12 +79,26 @@ public class GameManager : MonoBehaviour
         _player.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         _spawner.gameObject.SetActive(false);
         gameOverMenu.gameObject.SetActive(true);
+        
+        UpdateHighScore();
     }
     
     private void Update()
     {
         GameSpeed += gameSpeedAcceleration * Time.deltaTime;
         _score += GameSpeed * Time.deltaTime;
-        scoreText.text = Mathf.FloorToInt(_score).ToString("D5");
+        scoreText.text = Mathf.FloorToInt(_score).ToString("D6");
+    }
+
+    private void UpdateHighScore()
+    {
+        float highScore = PlayerPrefs.GetFloat("highScore", 0);
+        if (_score > highScore)
+        {
+            highScore = _score;
+            PlayerPrefs.SetFloat("highScore", highScore);
+        }
+        
+        highScoreText.text = Mathf.FloorToInt(highScore).ToString("D6");
     }
 }
