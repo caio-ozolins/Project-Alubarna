@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -77,5 +78,13 @@ public class Player : MonoBehaviour
             _isHoldingJump = false;
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            _animator.SetBool("isDead", true);
+            GameManager.Instance.GameOver();
+        }
+    }
 }
