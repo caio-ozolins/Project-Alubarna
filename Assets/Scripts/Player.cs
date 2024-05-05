@@ -61,14 +61,18 @@ public class Player : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (_isGrounded || _position.y <= jumpHeightThreshold && context.started)
+        if (_isGrounded || _position.y <= jumpHeightThreshold)
         {
-            _isGrounded = false;
-            _animator.SetBool(IsJumping, true);
-            _isHoldingJump = true;
-            _holdJumpTimer = 0;
-            velocity.y = jumpForce;
-        } else if (context.canceled)
+            if (context.performed)
+            {
+                _isGrounded = false;
+                _animator.SetBool(IsJumping, true);
+                _isHoldingJump = true;
+                _holdJumpTimer = 0;
+                velocity.y = jumpForce;
+            }
+        }
+        if (context.canceled)
         {
             _isHoldingJump = false;
         }
