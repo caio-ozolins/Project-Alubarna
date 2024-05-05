@@ -1,13 +1,15 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
-using Object = System.Object;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    // public TextMeshProUGUI gameOverText;
+    // public Button retryButton;
+    public GameObject gameOverMenu;
+    
     public float initialGameSpeed = 30f;
     public float gameSpeedAcceleration = 2;
     public float GameSpeed { get; private set; }
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
 
-    private void NewGame()
+    public void NewGame()
     {
         Objects[] objects = FindObjectsOfType<Objects>();
 
@@ -55,8 +57,10 @@ public class GameManager : MonoBehaviour
         GameSpeed = initialGameSpeed;
         enabled = true;
         
-        _player.gameObject.SetActive(true);
+        _player.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        _player.gameObject.GetComponent<Animator>().SetBool("isDead", false);
         _spawner.gameObject.SetActive(true);
+        gameOverMenu.gameObject.SetActive(false);
     }
 
     public void GameOver()
@@ -64,9 +68,9 @@ public class GameManager : MonoBehaviour
         GameSpeed = 0f;
         enabled = false;
         
-        // _player.gameObject.SetActive(false);
         _player.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         _spawner.gameObject.SetActive(false);
+        gameOverMenu.gameObject.SetActive(true);
     }
     
     private void Update()

@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     
     private Vector2 _position;
 
+    private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    private static readonly int IsDead = Animator.StringToHash("isDead");
+    private static readonly int Rebirth = Animator.StringToHash("Rebirth");
+    
     [SerializeField] private float gravity = 9.81f * 2;
     
     [Header("Jump")]
@@ -23,8 +27,7 @@ public class Player : MonoBehaviour
     private float _holdJumpTimer;
     private bool _isHoldingJump;
     private bool _isGrounded;
-    private static readonly int IsJumping = Animator.StringToHash("isJumping");
-
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -83,8 +86,13 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
-            _animator.SetBool("isDead", true);
+            _animator.SetBool(IsDead, true);
             GameManager.Instance.GameOver();
         }
+    }
+
+    public void Respawn()
+    {
+        _animator.SetTrigger(Rebirth);
     }
 }
