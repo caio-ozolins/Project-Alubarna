@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public GameObject gameOverMenu;
-    public GameObject scoreUI;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI coinsText;
     
     
     public float initialGameSpeed = 30f;
@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         GameSpeed += gameSpeedAcceleration * Time.deltaTime;
         _score += GameSpeed * Time.deltaTime;
         scoreText.text = Mathf.FloorToInt(_score).ToString("D6");
+        coinsText.text = _player.currency.ToString("D3");
     }
 
     private void UpdateHighScore()

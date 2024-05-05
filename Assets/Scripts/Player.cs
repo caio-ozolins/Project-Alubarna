@@ -1,7 +1,6 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -11,10 +10,10 @@ public class Player : MonoBehaviour
     private const float MaxHoldJumpTime = 0.2f;
 
     public Vector2 velocity;
-    public float distance;
     
     private Vector2 _position;
-
+    public int currency;
+    
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsDead = Animator.StringToHash("isDead");
     private static readonly int Rebirth = Animator.StringToHash("Rebirth");
@@ -88,6 +87,10 @@ public class Player : MonoBehaviour
         {
             _animator.SetBool(IsDead, true);
             GameManager.Instance.GameOver();
+        } else if (other.CompareTag("Currency"))
+        {
+            currency += 1;
+            Destroy(other.gameObject);
         }
     }
 
