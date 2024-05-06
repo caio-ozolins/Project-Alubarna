@@ -2508,6 +2508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinSFX: {fileID: 8300000, guid: 759069bf63e7983439bb9382029475cf, type: 3}
+  deathSFX: {fileID: 8300000, guid: 3ae2605e64861664abaae12bb074ca77, type: 3}
   velocity: {x: 0, y: 0}
   currency: 0
   gravity: -400

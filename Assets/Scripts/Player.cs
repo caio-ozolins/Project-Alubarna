@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private PlayerInput _playerInput;
 
     [SerializeField] private AudioClip coinSFX;
+    [SerializeField] private AudioClip deathSFX;
     
     private const float GroundHeight = 0;
     private const float MaxHoldJumpTime = 0.2f;
@@ -93,6 +94,7 @@ public class Player : MonoBehaviour
             _animator.SetBool(IsDead, true);
             _playerInput.enabled = false;
             GameManager.Instance.GameOver();
+            _audioSource.PlayOneShot(deathSFX);
         } else if (other.CompareTag("Currency"))
         {
             currency += 1;
