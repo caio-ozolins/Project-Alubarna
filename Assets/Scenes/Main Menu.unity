@@ -313,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Project Alubarna
+  m_text: Endless Runner
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73b0a7b68485bf74aabaab52d3945942, type: 2}
   m_sharedMaterial: {fileID: 1339025691240204894, guid: 73b0a7b68485bf74aabaab52d3945942, type: 2}
@@ -819,9 +819,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverMenu: {fileID: 0}
-  scoreUI: {fileID: 0}
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
+  coinsText: {fileID: 0}
   initialGameSpeed: 30
   gameSpeedAcceleration: 2
 --- !u!4 &676055881
