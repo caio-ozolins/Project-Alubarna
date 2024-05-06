@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 public class Player : MonoBehaviour
 {
     private Animator _animator;
+    private PlayerInput _playerInput;
     
     private const float GroundHeight = 0;
     private const float MaxHoldJumpTime = 0.2f;
@@ -86,6 +87,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Obstacle"))
         {
             _animator.SetBool(IsDead, true);
+            _playerInput.enabled = false;
             GameManager.Instance.GameOver();
         } else if (other.CompareTag("Currency"))
         {

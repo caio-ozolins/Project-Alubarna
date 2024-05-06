@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         
         _player.gameObject.GetComponent<BoxCollider2D>().enabled = true;
         _player.gameObject.GetComponent<Animator>().SetBool(IsDead, false);
+        _player.gameObject.GetComponent<PlayerInput>().enabled = true;
         _spawner.gameObject.SetActive(true);
         gameOverMenu.gameObject.SetActive(false);
         
