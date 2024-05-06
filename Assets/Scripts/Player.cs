@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     private Animator _animator;
+    private AudioSource _audioSource;
     private PlayerInput _playerInput;
+
+    [SerializeField] private AudioClip coinSFX;
     
     private const float GroundHeight = 0;
     private const float MaxHoldJumpTime = 0.2f;
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+        _playerInput = GetComponent<PlayerInput>();
     }
 
     private void FixedUpdate()
@@ -93,6 +97,7 @@ public class Player : MonoBehaviour
         {
             currency += 1;
             Destroy(other.gameObject);
+            _audioSource.PlayOneShot(coinSFX);
         }
     }
 
