@@ -206,8 +206,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 676055880}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 823189666}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
@@ -1042,6 +1042,7 @@ GameObject:
   - component: {fileID: 823189663}
   - component: {fileID: 823189665}
   - component: {fileID: 823189664}
+  - component: {fileID: 823189666}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -1109,6 +1110,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823189662}
   m_CullTransparentMesh: 1
+--- !u!114 &823189666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823189662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a252edd4e81b0b4bbd09af09f0e9ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1437299147
 GameObject:
   m_ObjectHideFlags: 0

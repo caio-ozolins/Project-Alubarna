@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        var spawnChance = Random.value;
+        float spawnChance = Random.value;
 
         foreach (var obj in objects)
         {
