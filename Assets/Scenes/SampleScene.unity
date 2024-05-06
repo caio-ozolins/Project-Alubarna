@@ -2310,8 +2310,8 @@ MonoBehaviour:
   scoreText: {fileID: 746699495}
   highScoreText: {fileID: 1471444995}
   coinsText: {fileID: 1016177792}
-  initialGameSpeed: 40
-  gameSpeedAcceleration: 2
+  initialGameSpeed: 100
+  gameSpeedAcceleration: 10
 --- !u!4 &1672835039
 Transform:
   m_ObjectHideFlags: 0
