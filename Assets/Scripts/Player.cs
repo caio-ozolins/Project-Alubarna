@@ -1,19 +1,27 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     private Animator _animator;
+    private AudioSource _audioSource;
+    private PlayerInput _playerInput;
+
+    [SerializeField] private AudioClip coinSFX;
+    [SerializeField] private AudioClip deathSFX;
     
     private const float GroundHeight = 0;
     private const float MaxHoldJumpTime = 0.2f;
 
     public Vector2 velocity;
-    public float distance;
     
     private Vector2 _position;
-
+    public int currency;
+    
+    private static readonly int IsJumping = Animator.StringToHash("isJumping");
+    private static readonly int IsDead = Animator.StringToHash("isDead");
+    private static readonly int Rebirth = Animator.StringToHash("Rebirth");
+    
     [SerializeField] private float gravity = 9.81f * 2;
     
     [Header("Jump")]
@@ -22,11 +30,12 @@ public class Player : MonoBehaviour
     private float _holdJumpTimer;
     private bool _isHoldingJump;
     private bool _isGrounded;
-    private static readonly int IsJumping = Animator.StringToHash("isJumping");
-
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+        _playerInput = GetComponent<PlayerInput>();
     }
 
     private void FixedUpdate()
@@ -77,5 +86,25 @@ public class Player : MonoBehaviour
             _isHoldingJump = false;
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            _animator.SetBool(IsDead, true);
+            _playerInput.enabled = false;
+            GameManager.Instance.GameOver();
+            _audioSource.PlayOneShot(deathSFX);
+        } else if (other.CompareTag("Currency"))
+        {
+            currency += 1;
+            Destroy(other.gameObject);
+            _audioSource.PlayOneShot(coinSFX);
+        }
+    }
+
+    public void Respawn()
+    {
+        _animator.SetTrigger(Rebirth);
+    }
 }
